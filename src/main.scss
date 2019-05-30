@@ -1,0 +1,229 @@
+$fonts: 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    min-height: calc(100vh - 120px);
+    font-family: $fonts;
+    background-color: #59ab5c;
+    box-sizing: border-box;    
+    padding-bottom: 60px;
+}
+
+.wrapper {
+    max-width: 1082px;
+    margin: 0 auto;    
+}
+
+.input {
+    min-height: 50px;
+    border-radius: 3px;
+    border: 1px solid #d2d2d2;
+    font-size: 16px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    font-family: $fonts;
+    &::placeholder {
+        font-family: $fonts;
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: .02em;
+    }
+}
+
+h1 {
+    float: left;
+    font-size: 40px;
+    letter-spacing: 2px;
+}
+
+button {
+    background: #bf3737;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: .9em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.submit-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    clear: both;
+    margin-bottom: 40px;
+
+    textarea {
+        flex-basis: 100%;
+        @extend .input;
+        margin-bottom: 10px;
+    }
+
+    input {
+        @extend .input;
+        margin: 0 10px 10px 0;
+        font-family: $fonts;
+        width: 300px;
+    }
+}
+
+.auth {
+    float: right;
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    background: #313131;
+    padding: 30px;
+    border-radius: 9px;
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: 0;
+
+    input {
+        @extend .input;
+        flex-basis: 100%;
+        min-height: 40px;
+        margin-bottom: 10px;
+    }
+}
+
+.hello {
+    float:right;
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.controls {
+    background: #f5f5f5;
+    display: flex;
+    padding: 20px 40px;
+}
+
+.tasks {
+    background: #fff;
+    padding: 20px 40px;  
+    
+    &__item{
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eaeaea;
+        padding-bottom: 20px;
+        overflow: hidden;
+
+        &--done {
+            background: #fbf2d3;
+
+            .tasks__container {
+                background: #ffe9a9;
+            }
+        }        
+    }
+
+    &__username {
+        font-weight: 600;        
+        margin-bottom: 5px;
+    }
+
+    &__email {
+        color:gray;        
+        font-size: .9em;
+    }
+
+    &__container {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    &__text {
+        padding: 0 15px;
+    }
+
+    span {
+        float: right;
+        color: blue;
+        cursor: pointer;
+        margin-bottom: 5px;
+        margin-right: 15px;
+
+        :hover {
+            opacity: .8;
+        }
+    }
+
+    textarea {
+        @extend .input;
+        width:100%;
+    }
+    form {
+        margin-bottom: 30px;
+
+        .tasks__email {
+            margin-bottom: 5px;
+        }
+    }
+
+    input[type=checkbox] {
+        float: left;
+        margin-top: 5px;
+    }
+}
+
+.sortings {    
+    border-radius: 9px 9px 0 0;    
+    @extend .controls;
+
+    &__item{
+        margin-right: 40px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        &.selected {
+            font-weight: 600;
+            position: relative;
+
+            &.asc, &.desc {
+                &::after {
+                    content: '';
+                    display: block;
+                    border-width: 4px;
+                    border-color: #000 transparent transparent  transparent;
+                    border-style: solid;
+                    position: absolute;
+                    right: -15px;
+                    top: 11px;;
+                }                
+            }
+
+            &.desc::after{
+                transform: rotate(180deg);
+                top: 7px;
+            }
+        }
+    }
+}
+
+.pagination {    
+    border-radius: 0 0 9px 9px;    
+    @extend .controls;
+
+    &__page {        
+        margin-right: 40px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .8;
+        }
+
+        &.selected {
+            opacity: 0.4;
+        }
+    }
+}
