@@ -33,17 +33,23 @@ class Task extends Component {
     }
 
     render() {
-        const {username, email, token} = this.props;
+        const {id, username, email, token} = this.props;
         const {editing, textValue, status} = this.state;
         if (!editing)
             return (
                 <div className={`tasks__item ${status !== 0 && 'tasks__item--done'}`}>   
                     <div className="tasks__container">
-                        <div className="tasks__username">{username}</div>
-                        <div className="tasks__email">{email}</div>
+                        <div className="tasks__userpic"></div>
+                        <div className="tasks__userinfo">
+                            <div className="tasks__username">{username}</div>
+                            <a href={`mailto:${email}`} className="tasks__email">{email}</a>
+                        </div>                        
+                        <span className="tasks__id">
+                            {`#${id}`}
+                        </span>
                     </div>                                     
                     <div className="tasks__text">{textValue}</div>
-                    { !!token && <span onClick={this.onEditClick}>Edit</span>}
+                    { !!token && <span className="link-prim link-prim--edit" onClick={this.onEditClick}>Edit</span>}
                 </div>
             );
         else 
@@ -51,9 +57,9 @@ class Task extends Component {
             <form onSubmit={e => this.handleSubmit(e)}>
                 <input type="checkbox" checked={status !== 0} onChange={this.handleCheck}/>
                 <div className="tasks__username">{username}</div>
-                <div className="tasks__email">{email}</div>
+                <a href={`mailto:${email}`} className="tasks__email">{email}</a>
                 <textarea name="text" onChange={e => this.handleChange(e)} value={textValue} cols="30" rows="7"></textarea>
-                <button type="submit">Send</button>
+                <button type="submit" className="button-prim">Send</button>
             </form>
         );
     }

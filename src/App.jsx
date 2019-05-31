@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Form from './components/Form';
 import Tasks from './components/Tasks';
 import Pagination from './components/Pagination';
@@ -8,14 +8,24 @@ import './main.scss';
 
 const App = () => {
     return (
-        <div className="wrapper">
-            <h1>DISQUSS</h1>
-            <Auth/>
-            <Form/>
-            <Sortings/>
-            <Tasks/>
-            <Pagination/>
-        </div>
+        <Fragment>
+            <header className="header">
+                <div className="wrapper">
+                    <h1><div className="logo"></div> DIS<i>Q</i>USS</h1>
+                    <Auth/>
+                </div>                
+            </header>
+            <div className="bar">
+                <div className="wrapper">
+                    <Sortings/>                    
+                </div>                
+            </div>
+            <div className="wrapper">                                                
+                <Form/>
+                <Tasks/>
+                <Pagination/>
+            </div>
+        </Fragment>
     );
 };
 

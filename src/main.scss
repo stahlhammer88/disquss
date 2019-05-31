@@ -1,24 +1,29 @@
 $fonts: 'Open Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+$nice-yellow: #EBC46B;
+$border-color: #d2d2d2;
+$violet: #7245A5;
 
 html, body, #root {
     margin: 0;
     padding: 0;
     min-height: calc(100vh - 120px);
-    font-family: $fonts;
-    background-color: #59ab5c;
+    font-family: $fonts;    
     box-sizing: border-box;    
     padding-bottom: 60px;
 }
 
 .wrapper {
     max-width: 1082px;
-    margin: 0 auto;    
+    margin: 0 auto;        
+    position: relative;    
+    clear: both;
 }
 
 .input {
-    min-height: 50px;
+    min-height: 40px;
+    min-width: 350px;
     border-radius: 3px;
-    border: 1px solid #d2d2d2;
+    border: 1px solid $border-color;
     font-size: 16px;
     padding: 10px 20px;
     box-sizing: border-box;
@@ -31,30 +36,108 @@ html, body, #root {
     }
 }
 
-h1 {
-    float: left;
-    font-size: 40px;
-    letter-spacing: 2px;
+.stretch {
+    float:left;
+    width: 100%;
 }
 
-button {
-    background: #bf3737;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    font-size: .9em;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.caption-font {
+    font-size: 17px;
     font-weight: 600;
+}
+
+.header {
+    @extend .stretch;
+    background: $violet;    
+    position: relative;
+    z-index: 3;
+}
+
+h1 {
+    float: left;
+    font-size: 32px;
+    letter-spacing: 2px;
+    font-family: 'M PLUS Rounded 1c', $fonts;
+    color:#fff;
+    margin: 14px 0px;
+
+    i {
+        font-style: normal;
+        color: $nice-yellow;
+    }
+}
+
+h2 {
+    @extend .stretch;
+    font-weight: 600;
+    font-size: 22px;
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+    color: $violet;
+}
+
+.logo {
+    width: 37px;
+    height: 37px;
+    background: url('/img/disquss_logo.png') no-repeat;
+    background-size: cover;
+    display: inline-block;
+    margin-bottom: -12px;
+}
+
+// button {
+//     background: #bf3737;
+//     padding: 10px 20px;
+//     border-radius: 5px;
+//     border: none;
+//     font-size: .9em;
+//     color: #fff;    
+//     letter-spacing: 1px;
+//     font-weight: 600;
+// }
+
+@keyframes slideDown {
+    from {
+        transform: scaleY(0);
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        transform: scaleY(1);
+        max-height: 400px;
+        opacity: 1;
+    }
+}
+@keyframes slideUp {
+    from {
+        transform: scaleY(1);
+        max-height: 400px;
+        opacity: 1;
+    }
+    to {
+        transform: scaleY(0);
+        max-height: 0;
+        opacity: 0;
+    }
 }
 
 .submit-form {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    clear: both;
-    margin-bottom: 40px;
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
+    border-radius: 0 0 5px 5px;
+    animation: slideDown .3s ease-in-out forwards;
+    transform-origin: top left;
+
+    &.rollup {
+        animation: slideUp .3s ease-in-out forwards;
+    }
 
     textarea {
         flex-basis: 100%;
@@ -70,89 +153,154 @@ button {
     }
 }
 
+.bar {
+    @extend .stretch;
+    background: #f9f9f9;
+    border-bottom: #E2E2E2;    
+    padding: 22px 0;
+    border-bottom: 1px solid $border-color;
+}
+
 .auth {
     float: right;
     display: flex;
     flex-wrap: wrap;
-    width: 300px;
-    background: #313131;
-    padding: 30px;
+    width: 340px;
+    background: #fff;
+    padding: 30px 50px;
     border-radius: 9px;
-    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.2);
     position: absolute;
-    right: 0;
+    right: 0;    
+    top: 75px;
+    z-index: 2;
 
     input {
         @extend .input;
-        flex-basis: 100%;
-        min-height: 40px;
-        margin-bottom: 10px;
+        flex-basis: 100%;        
+        margin-bottom: 15px;        
+    }   
+}
+
+.auth-buttons {
+    @extend .caption-font;
+    color: #fff;
+    margin-top: 25px;
+    float: right;
+
+    &__sign-in {
+        margin-right: 15px;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .button-prim {
+        margin-left: 15px;
+    }
+}
+
+.button-prim {
+    background: $nice-yellow;
+    color: $violet;
+    border-radius: 5px;
+    padding: 8px 25px;
+    box-shadow: -3px 3px 0 0 #fff;
+    cursor: pointer;
+    border: none;
+    @extend .caption-font;
+    font-family: $fonts;
+}
+
+.link-prim {
+    @extend .caption-font;
+    color: $violet;    
+    cursor: pointer;
+
+    &--cancel {
+        margin-top: 9px;
+        margin-left: 25px;
+    }
+
+    &--edit {
+        float: right;
+
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 27px;
+            height: 27px;
+            background: url('/img/pencil.png') no-repeat;
+            margin-bottom: -7px;
+            margin-right: 7px;
+        }
     }
 }
 
 .hello {
-    float:right;
-    font-size: 30px;
+    float: right;
+    font-size: 17px;
     font-weight: 600;
     margin-top: 30px;
+    color: #fff;
 }
 
-.controls {
-    background: #f5f5f5;
+.controls {    
     display: flex;
-    padding: 20px 40px;
+    padding: 20px 1px;
 }
 
-.tasks {
-    background: #fff;
-    padding: 20px 40px;  
+.tasks {    
+    padding: 20px 0;  
     
     &__item{
-        margin-bottom: 20px;
-        border-bottom: 1px solid #eaeaea;
-        padding-bottom: 20px;
-        overflow: hidden;
+        margin-bottom: 30px;
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 40px;
+        overflow: hidden; 
 
         &--done {
-            background: #fbf2d3;
+            
 
             .tasks__container {
-                background: #ffe9a9;
+                
             }
         }        
     }
 
-    &__username {
-        font-weight: 600;        
-        margin-bottom: 5px;
+    &__userinfo {
+        flex-grow: 1;
     }
 
-    &__email {
-        color:gray;        
+    &__userpic {
+        width: 30px;
+        height: 30px;
+        background: #f5f5f5;
+        border-radius: 50%;
+        float: left;
+        margin-right: 18px;
+    }
+
+    &__username {
+        font-weight: 600;                
+    }
+
+    &__email {             
         font-size: .9em;
     }
 
-    &__container {
-        background: #f5f5f5;
-        padding: 15px;
-        border-radius: 5px;
-        margin-bottom: 10px;
+    &__container {        
+        padding: 10px 0;
+        border-radius: 5px;  
+        display: flex;      
     }
 
-    &__text {
-        padding: 0 15px;
+    &__text {        
+        font-size: 15px;
     }
-
-    span {
-        float: right;
-        color: blue;
-        cursor: pointer;
-        margin-bottom: 5px;
-        margin-right: 15px;
-
-        :hover {
-            opacity: .8;
-        }
+    
+    &__id{
+        color: #9F9F9F;
+        font-size: 15px;
     }
 
     textarea {
@@ -174,12 +322,15 @@ button {
 }
 
 .sortings {    
-    border-radius: 9px 9px 0 0;    
+    border-radius: 9px 9px 0 0; 
+    float:left;
     @extend .controls;
 
     &__item{
-        margin-right: 40px;
+        margin-right: 80px;
+        font-size: 14px;
         cursor: pointer;
+        text-transform: uppercase;
 
         &:hover {
             opacity: .8;
@@ -188,25 +339,43 @@ button {
         &.selected {
             font-weight: 600;
             position: relative;
+            color: $violet;
 
             &.asc, &.desc {
                 &::after {
                     content: '';
                     display: block;
                     border-width: 4px;
-                    border-color: #000 transparent transparent  transparent;
+                    border-color: $violet transparent transparent  transparent;
                     border-style: solid;
                     position: absolute;
                     right: -15px;
-                    top: 11px;;
+                    top: 9px;
                 }                
             }
 
             &.desc::after{
                 transform: rotate(180deg);
-                top: 7px;
+                top: 5px;
             }
         }
+    }
+}
+
+.button-add-task{
+    @extend .caption-font;
+    margin-top: -72px;
+    cursor: pointer;
+    float:right;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: url('/img/add.png') no-repeat;
+        margin-bottom: -15px;
+        margin-right: 10px;
     }
 }
 
