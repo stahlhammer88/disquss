@@ -1,14 +1,22 @@
 import React, { Component, Fragment } from 'react';
-import { logIn } from '../actions';
+import { logIn, logOut } from '../actions';
 import { connect } from 'react-redux';
 import {Fade} from 'react-reveal';
 
 class Auth extends Component {
     state = {
         username: '',
-        password: '',
+        password: '',        
         isOpened: false
     }
+
+    
+    componentWillMount() {
+        const token = localStorage.getItem('token');        
+        if(token) 
+            this.props.dispatch(logIn(null, null, token));
+    }
+    
 
     handleChange = e => {
         const value = e.target.value;
@@ -18,9 +26,15 @@ class Auth extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const dataToSubmit = {...this.state};
+        const {username, password} = this.state;
 
-        this.props.dispatch(logIn(dataToSubmit))
+        this.props.dispatch(logIn(username, password, null))
+            .then(res => localStorage.setItem('token', this.props.token))
+    }
+
+    handleLogout = () => {
+        localStorage.removeItem('token');
+        this.props.dispatch(logOut());
     }
 
     render() {
@@ -48,7 +62,7 @@ class Auth extends Component {
                 </Fragment>
             );
         else return (
-            <div className="hello">Hello, {username}</div>
+            <div className="hello">Hello, admin <div className="hello__logout" onClick={this.handleLogout}></div></div>
         )
     }
 }

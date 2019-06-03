@@ -25,6 +25,7 @@ const App = () => {
                 <Tasks/>
                 <Pagination/>
             </div>
+            <footer className="footer"></footer>
         </Fragment>
     );
 };

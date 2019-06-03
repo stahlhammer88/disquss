@@ -41,12 +41,21 @@ export function editTask({token, id, text, status}) {
     }
 }
 
-export function logIn({username, password}) {
+export function logIn(username, password, token) {
     return dispatch => {
-        dispatch({type: 'LOADING', loading: true});           
-        return authenticate(username, password).then(res => {                        
-            dispatch({type: 'LOG_IN', payload: {token: res.token}, loading: false})
-        })   
-        .catch(error => dispatch({type: 'FAILED', payload:{ error: true, errorMessage: `${error}`}})) 
+        if (!token) {
+            dispatch({type: 'LOADING', loading: true});           
+            return authenticate(username, password).then(res => {                        
+                dispatch({type: 'LOG_IN', payload: {token: res.token}, loading: false})
+            })   
+            .catch(error => dispatch({type: 'FAILED', payload:{ error: true, errorMessage: `${error}`}})) 
+        }
+        else dispatch({type: 'LOG_IN', payload: {token}, loading: false})
+    }
+}
+
+export function logOut() {
+    return dispatch => {
+       dispatch({type: 'LOG_OUT'})
     }
 }

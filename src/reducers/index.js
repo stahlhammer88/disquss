@@ -39,6 +39,11 @@ export const Reducer = (state={...initialState}, action) => {
                 token: payload.token,
                 loading: false
             };
+        case 'LOG_OUT':         
+            return {
+                ...state, 
+                token: '',
+            };
         case 'EDIT':
             const newTasks = [...state.tasks];
             newTasks.forEach(t => {

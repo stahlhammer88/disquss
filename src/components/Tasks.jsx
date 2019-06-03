@@ -3,23 +3,27 @@ import { getTasks} from './../actions/index';
 import ReactLoading from 'react-loading';
 import { connect } from 'react-redux';
 import Task from './Task';
+import Loading from './Loading';
 
 class Tasks extends Component {
+
     componentDidMount() {
         const {sortField, sortDir, page} = this.props;        
         this.props
-            .dispatch(getTasks(sortField, sortDir, page))            
+            .dispatch(getTasks(sortField, sortDir, page))                   
     }
 
-    render() {
-        const {tasks, loading} = this.props;
-        if (!tasks && loading) return <ReactLoading type='spin' color="#c5c5c5" height={50} width={50} />
-        if (!tasks) return null;
-        return (
+    render() {        
+        const {tasks, loading} = this.props;        
+        if (!tasks) return null;        
+        return (            
             <div className='tasks'>
-                {tasks.map(t => (
-                    <Task key={t.id} handleCheck={this.handleCheck} {...t}/>
-                ))}
+                { loading &&  <Loading size={120} height={450}/> }
+                {(tasks.length) &&                   
+                    tasks.map(t => (
+                        <Task key={t.id} handleCheck={this.handleCheck} {...t}/>
+                    ))
+                }                
             </div>
         );
     }
